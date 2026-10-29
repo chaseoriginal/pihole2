@@ -1,0 +1,26 @@
+services:
+  pihole:
+    container_name: ${CONTAINER_NAME}
+    image: pihole/pihole:latest
+    ports:
+    - ${IP}:${dns_port}:${dns_port}/tcp
+    - ${IP}:${dns_port}:${dns_port}/udp
+    - ${IP}:${dhcp_port}:${dhcp_port}/udp
+    - ${IP}:${http_port}:${http_port}/tcp
+    - ${IP}:${https_port}:${https_port}/tcp
+    environment:
+    - TZ=America/Chicago
+    - WEBPASSWORD=${WEBPASSWORD}
+    - VIRTUAL_HOST=ore-pihole2
+    - CORS_HOSTS=hole2.echoinggreen.net
+    volumes:
+    - /var/lib/docker/volumes/pihole2/dnsmasq.d:/etc/dnsmasq.d
+    - /var/lib/docker/volumes/pihole2/etc:/etc/pihole
+    dns:
+    - ${dns_host1}
+    - ${dns_host2}
+    - ${dns_host3}
+    cap_add:
+    - NET_ADMIN
+    restart: unless-stopped
+volumes: {}
