@@ -1,7 +1,7 @@
 services:
   pihole:
     container_name: ${CONTAINER_NAME}
-    image: pihole/pihole:latest
+    image: pihole/pihole:2026.10.1
     ports:
     - ${IP}:${dns_port}:${dns_port}/tcp
     - ${IP}:${dns_port}:${dns_port}/udp
